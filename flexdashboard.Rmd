@@ -1,9 +1,10 @@
 ---
-title: "Untitled"
+title: "Encuesta hogares Dashboard en Flexdashboard"
 output: 
   flexdashboard::flex_dashboard:
-    orientation: columns
+    orientation: rows
     vertical_layout: fill
+runtime: shiny  #  interactividad en tiempo real
 ---
 
 ```{r setup, include=FALSE}
@@ -15,28 +16,35 @@ library(plotly)
 ```
 
 
-
-Column {data-width=650}
+Row {.sidebar}
 -----------------------------------------------------------------------
-
-### Chart A
+### Controles
 
 ```{r}
+# Ejemplo de controles interactivos
+sliderInput("num", "Número de observaciones:", 10, 100, 50)
 
 ```
 
-Column {data-width=350}
+
+Row 
 -----------------------------------------------------------------------
-
-### Chart B
-
+### Chart 1
 ```{r}
+data <- mtcars
+ggplot(data, aes(x = wt, y = mpg)) +
+  geom_point() +
+  labs(title = "Relación Peso vs. Consumo")
 
 ```
 
-### Chart C
+Row
+-------------------------------------
+  ### Chart 2
+
+
 
 ```{r}
-
+plot_ly(data = mtcars, x = ~wt, y = ~mpg, type = 'scatter', mode = 'markers')
 ```
 
